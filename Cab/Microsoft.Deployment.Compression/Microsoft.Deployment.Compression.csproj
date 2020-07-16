@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: E:\Gits\sample code\msftcompressioncab.1.0.0\lib\Microsoft.Deployment.Compression.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E27586B-D9CF-4B1B-B939-DAECBDF84EA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Microsoft.Deployment.Compression</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ApplicationVersion>3.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Microsoft</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Deployment\Compression\ArchiveException.cs" />
+    <Compile Include="Deployment\Compression\ArchiveFileInfo.cs" />
+    <Compile Include="Deployment\Compression\ArchiveInfo.cs" />
+    <Compile Include="Deployment\Compression\ArchiveProgressEventArgs.cs" />
+    <Compile Include="Deployment\Compression\ArchiveProgressType.cs" />
+    <Compile Include="Deployment\Compression\ArchiveFileStreamContext.cs" />
+    <Compile Include="Deployment\Compression\BasicUnpackStreamContext.cs" />
+    <Compile Include="Deployment\Compression\CompressionEngine.cs" />
+    <Compile Include="Deployment\Compression\CompressionLevel.cs" />
+    <Compile Include="Deployment\Compression\CargoStream.cs" />
+    <Compile Include="Deployment\Compression\DuplicateStream.cs" />
+    <Compile Include="Deployment\Compression\IPackStreamContext.cs" />
+    <Compile Include="Deployment\Compression\IUnpackStreamContext.cs" />
+    <Compile Include="Deployment\Compression\OffsetStream.cs" />
+    <Compile Include="Deployment\Compression\SafeNativeMethods.cs" />
+    <Compile Include="Tools\WindowsInstallerXml\WixDistribution.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

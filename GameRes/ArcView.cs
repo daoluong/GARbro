@@ -144,7 +144,7 @@ namespace GameRes
         private void InitFromFileStream (FileStream fs, uint length)
         {
             m_map = MemoryMappedFile.CreateFromFile (fs, null, length,
-                MemoryMappedFileAccess.Read, null, HandleInheritability.None, true);
+                MemoryMappedFileAccess.Read/*, null*/, HandleInheritability.None, true);
             try {
                 View = new Frame (this);
             } catch {
@@ -156,7 +156,7 @@ namespace GameRes
         private void InitFromStream (Stream input, uint length)
         {
             m_map = MemoryMappedFile.CreateNew (null, length, MemoryMappedFileAccess.ReadWrite,
-                MemoryMappedFileOptions.None, null, HandleInheritability.None);
+                MemoryMappedFileOptions.None/*, null*/, HandleInheritability.None);
             try
             {
                 using (var view = m_map.CreateViewAccessor (0, length, MemoryMappedFileAccess.Write))

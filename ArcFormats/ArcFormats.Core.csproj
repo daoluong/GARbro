@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ArcFormats</AssemblyName>
+    <RootNamespace>GameRes.Formats</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETCORE</DefineConstants>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETCORE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CsWare\AudioAF2.cs" />
+    <Compile Remove="DraftArc.cs" />
+    <Compile Remove="DraftAudio.cs" />
+    <Compile Remove="DraftImage.cs" />
+    <Compile Remove="Entis\AudioEMS.cs" />
+    <Compile Remove="Primel\AudioWBC.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="packages.config" />
+    <None Remove="Properties\Settings.settings" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NVorbis" Version="0.10.1" />
+    <PackageReference Include="SharpZipLib" Version="1.2.0" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+    <PackageReference Include="System.Security.Cryptography.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameRes\GameRes.Core.csproj" />
+    <ProjectReference Include="..\Net20\Net20.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Properties\Settings.settings" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Strings\arcStrings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>arcStrings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Strings\arcStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>arcStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="dotnet script &quot;$(SolutionDir)inc-revision.csx&quot; &quot;$(ProjectPath)&quot; $(ConfigurationName)&#xD;&#xA;&#xA;exit 0" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if not exist &quot;$(TargetDir)\GameData&quot; mkdir &quot;$(TargetDir)\GameData&quot;&#xD;&#xA;xcopy &quot;$(ProjectDir)\Resources\Formats.dat&quot; &quot;$(TargetDir)\GameData\&quot; /D /Y &gt;NUL" />
+  </Target>
+
+</Project>

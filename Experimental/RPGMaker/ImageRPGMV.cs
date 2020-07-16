@@ -28,7 +28,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Text;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+//using System.Web.Script.Serialization;
 
 namespace GameRes.Formats.RPGMaker
 {
@@ -124,8 +125,11 @@ namespace GameRes.Formats.RPGMaker
         static byte[] ParseSystemJson (string filename)
         {
             var json = File.ReadAllText (filename, Encoding.UTF8);
-            var serializer = new JavaScriptSerializer();
-            var sys = serializer.DeserializeObject (json) as IDictionary;
+            //var serializer = new JavaScriptSerializer();
+            //var sys = serializer.DeserializeObject (json) as IDictionary;
+
+
+            var sys = JsonConvert.DeserializeObject<IDictionary>(json);
             if (null == sys)
                 return null;
             var key = sys["encryptionKey"] as string;
