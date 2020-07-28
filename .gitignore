@@ -1,6 +1,7 @@
 bin
 obj
 tags
+.vs
 *.exe
 *.dll
 *.pdb
@@ -14,5 +15,9 @@ Images
 SchemeBuilder
 Makefile
 packages
-Experimental
+#Experimental
 .nuget
+*.csproj.user
+/.vscode
+/omnisharp.json
+/inc-revision.pl

@@ -81,6 +81,8 @@ namespace GARbro.GUI
 
             DeserializeScheme (Path.Combine (FormatCatalog.Instance.DataDirectory, FormatsDat));
             DeserializeScheme (Path.Combine (GetLocalAppDataFolder(), FormatsDat));
+
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
         }
 
         public string GetLocalAppDataFolder ()
