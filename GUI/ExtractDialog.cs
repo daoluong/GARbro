@@ -98,7 +98,7 @@ namespace GARbro.GUI
 
         protected void acb_OnEnterKeyDown (object sender, KeyEventArgs e)
         {
-            string path = (sender as AutoCompleteTextBox.Editors.AutoCompleteTextBox).Editor.Text;
+            string path = (sender as AutoCompleteBox).Text;
             if (!string.IsNullOrEmpty (path))
                 this.DialogResult = true;
         }

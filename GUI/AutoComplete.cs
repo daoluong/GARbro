@@ -29,73 +29,23 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using AutoCompleteTextBox.Editors;
 
 namespace GARbro.GUI
 {
     /// <summary>
     /// TextBox that uses filesystem as source for autocomplete.
     /// </summary>
-    public class ExtAutoCompleteBox : AutoCompleteTextBox.Editors.AutoCompleteTextBox
+    public class ExtAutoCompleteBox : AutoCompleteBox
     {
         public delegate void EnterKeyDownEvent(object sender, KeyEventArgs e);
         public event EnterKeyDownEvent EnterKeyDown;
-        public event TextChangedEventHandler TextChanged;
-
-        //public TextBox Editor { get; set; }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            //Editor = Template.FindName(PartEditor, this) as TextBox;
-
-            if (Editor != null)
-            {
-                Editor.TextChanged += OnEditorTextChanged;
-            }
-        }
 
         public ExtAutoCompleteBox()
         {
             this.GotFocus += (s, e) => { IsTextBoxFocused = true; };
             this.LostFocus += (s, e) => { IsTextBoxFocused = false; };
-
-            Provider = new SuggestionProvider(x =>
-            {
-                List<string> candidates = new List<string>();
-
-                try
-                {
-                    if (!GameRes.VFS.IsVirtual && IsTextBoxFocused)
-                    {
-
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            string dirname = Path.GetDirectoryName(Editor.Text);
-                            if (!string.IsNullOrEmpty(dirname) && Directory.Exists(dirname))
-                            {
-                                foreach (var dir in Directory.GetDirectories(dirname))
-                                {
-                                    if (dir.StartsWith(dirname, StringComparison.CurrentCultureIgnoreCase))
-                                        candidates.Add(dir);
-                                }
-                            }
-                        });
-                        
-                    }
-                }
-                catch 
-                {
-                }
-
-                return candidates;
-            });
         }
-        private void OnEditorTextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextChanged?.Invoke(sender, e);
-        }
+
         public bool IsTextBoxFocused
         {
             get { return (bool)GetValue(HasFocusProperty); }
@@ -118,30 +68,30 @@ namespace GARbro.GUI
                 EnterKeyDown(this, e);
         }
 
-        //protected override void OnPopulating(PopulatingEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (!GameRes.VFS.IsVirtual)
-        //        {
-        //            var candidates = new List<string>();
-        //            string dirname = Path.GetDirectoryName(this.Text);
-        //            if (!string.IsNullOrEmpty(dirname) && Directory.Exists(dirname))
-        //            {
-        //                foreach (var dir in Directory.GetDirectories(dirname))
-        //                {
-        //                    if (dir.StartsWith(dirname, StringComparison.CurrentCultureIgnoreCase))
-        //                        candidates.Add(dir);
-        //                }
-        //            }
-        //            this.ItemsSource = candidates;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        // ignore filesystem errors
-        //    }
-        //    base.OnPopulating(e);
-        //}
+        protected override void OnPopulating(PopulatingEventArgs e)
+        {
+            try
+            {
+                if (!GameRes.VFS.IsVirtual)
+                {
+                    var candidates = new List<string>();
+                    string dirname = Path.GetDirectoryName(this.Text);
+                    if (!string.IsNullOrEmpty(dirname) && Directory.Exists(dirname))
+                    {
+                        foreach (var dir in Directory.GetDirectories(dirname))
+                        {
+                            if (dir.StartsWith(dirname, StringComparison.CurrentCultureIgnoreCase))
+                                candidates.Add(dir);
+                        }
+                    }
+                    this.ItemsSource = candidates;
+                }
+            }
+            catch
+            {
+                // ignore filesystem errors
+            }
+            base.OnPopulating(e);
+        }
     }
 }
