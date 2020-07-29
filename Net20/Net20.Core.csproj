@@ -5,6 +5,7 @@
     <AssemblyName>Net20</AssemblyName>
     <RootNamespace>GameRes.Net20</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

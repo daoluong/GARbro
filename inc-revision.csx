@@ -70,7 +70,7 @@ string tmp_filename;
 StreamWriter tmp_output;
 {
     var assembly_file = File.OpenText(assembly_info);
-    tmp_filename = Path.Combine(prop_dir, Guid.NewGuid().ToString());
+    tmp_filename = Path.Combine(prop_dir, Path.GetRandomFileName());
 
     tmp_output = File.CreateText(tmp_filename);
 

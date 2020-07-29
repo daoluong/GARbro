@@ -21,3 +21,4 @@ packages
 /.vscode
 /omnisharp.json
 /inc-revision.pl
+Scheme/

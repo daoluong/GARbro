@@ -6,6 +6,7 @@
     <RootNamespace>Image.Convert</RootNamespace>
     <AssemblyName>Image.Convert</AssemblyName>
     <OutputType>Exe</OutputType>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
