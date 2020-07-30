@@ -54,6 +54,7 @@ namespace GameRes
         private MultiValueDictionary<uint, IResource> m_signature_map = new MultiValueDictionary<uint, IResource>();
 
         private Dictionary<string, string> m_game_map = new Dictionary<string, string>();
+        public Dictionary<string, string> GameMap { get { return m_game_map; } }
 
         /// <summary> The only instance of this class.</summary>
         public static FormatCatalog       Instance      { get { return m_instance; } }
