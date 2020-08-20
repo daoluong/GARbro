@@ -31,14 +31,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Abogado\keytable.dat" />
     <None Remove="packages.config" />
-    <None Remove="Properties\Settings.settings" />
+    <None Remove="ScrPlayer\ColorBitsTable1" />
+    <None Remove="ScrPlayer\ColorBitsTable2" />
+    <None Remove="ScrPlayer\ControlTable1" />
+    <None Remove="ScrPlayer\ControlTable2" />
+    <None Remove="ScrPlayer\ControlTable32" />
+    <None Remove="Softpal\WaveTable1" />
+    <None Remove="Softpal\WaveTable2" />
+    <None Remove="Unity\strings.dat" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NVorbis" Version="0.10.1" />
     <PackageReference Include="SharpZipLib" Version="1.2.0" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
     <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
@@ -51,10 +60,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Properties\Settings.settings" />
+    <EmbeddedResource Include="Abogado\keytable.dat" />
+    <EmbeddedResource Include="ScrPlayer\ColorBitsTable1" />
+    <EmbeddedResource Include="ScrPlayer\ColorBitsTable2" />
+    <EmbeddedResource Include="ScrPlayer\ControlTable1" />
+    <EmbeddedResource Include="ScrPlayer\ControlTable2" />
+    <EmbeddedResource Include="ScrPlayer\ControlTable32" />
+    <EmbeddedResource Include="Softpal\WaveTable1" />
+    <EmbeddedResource Include="Softpal\WaveTable2" />
+    <EmbeddedResource Include="Unity\strings.dat" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Update="Strings\arcStrings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -67,6 +89,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>arcStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
